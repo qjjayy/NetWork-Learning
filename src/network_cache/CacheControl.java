@@ -13,6 +13,7 @@ public class CacheControl {
 	private Date sMaxAge = null;
 	private boolean mustRevalidate = false;
 	private boolean noCache = false;
+	private boolean noStore = false;
 	private boolean proxyRevalidate = false;
 	private boolean publicCache = false;
 	private boolean privateCache = false;
@@ -39,6 +40,8 @@ public class CacheControl {
 					proxyRevalidate = true;
 				} else if (component.startsWith("no-cache")) {
 					noCache = true;
+				} else if (component.startsWith("no-store")) {
+					noStore = true;
 				} else if (component.startsWith("public")) {
 					publicCache = true;
 				} else if (component.startsWith("private")) {
@@ -64,6 +67,10 @@ public class CacheControl {
 
 	public boolean isNoCache() {
 		return noCache;
+	}
+
+	public boolean isNoStore() {
+		return noStore;
 	}
 
 	public boolean isProxyRevalidate() {

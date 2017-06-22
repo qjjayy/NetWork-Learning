@@ -10,6 +10,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * @author qjj <br>
+ *         使用线程池的daytime服务器
+ */
 public class PooledDaytimeServer {
 
 	public final static int PORT = 1024;

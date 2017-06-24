@@ -13,19 +13,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author qjj
- *	记录请求和错误的daytime服务器
+ * @author qjj<br>
+ *         记录请求和错误的daytime服务器
  */
 public class LoggingDaytimeServer {
-	
+
 	public final static int PORT = 1024;
 	// 日志工具是线程安全的，所以将它们存储在共享的静态字段中很安全，这样就可以在多线程中共享
 	private final static Logger auditLogger = Logger.getLogger("requests");
 	private final static Logger errorLogger = Logger.getLogger("errors");
-	
+
 	public static void main(String[] args) {
 		ExecutorService pool = Executors.newFixedThreadPool(50);
-		
+
 		try (ServerSocket server = new ServerSocket(PORT)) {
 			while (true) {
 				try {
@@ -45,17 +45,17 @@ public class LoggingDaytimeServer {
 			// 从而导致整个服务器都崩溃
 			errorLogger.log(Level.SEVERE, "Can't start server: " + ex.getMessage(), ex);
 		}
-		
+
 	}
 
 	private static class DaytimeTask implements Callable<Void> {
 
 		private Socket connection;
-		
+
 		DaytimeTask(Socket connection) {
 			this.connection = connection;
 		}
-		
+
 		@Override
 		public Void call() throws Exception {
 			try {
@@ -77,6 +77,6 @@ public class LoggingDaytimeServer {
 			}
 			return null;
 		}
-		
+
 	}
 }

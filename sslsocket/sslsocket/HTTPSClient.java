@@ -1,4 +1,4 @@
-package client;
+package sslsocket;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import javax.net.ssl.SSLSocketFactory;
 public class HTTPSClient {
 
 	public static void main(String[] args) {
-		int port = 1024;
-		String host = "http://www.baidu.com";
+		int port = 443; // 默认https端口
+		String host = "www.baidu.com";
 		SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
 		SSLSocket socket = null;
 		try {
@@ -40,9 +40,19 @@ public class HTTPSClient {
 			// 读取长度
 			String contentLength = in.readLine();
 			int length = Integer.MAX_VALUE;
-			if (contentLength != null) {
+			try {
 				length = Integer.parseInt(contentLength.trim(), 16);
+			} catch (NumberFormatException ex) {
+				// 这个服务器在响应体的第一行没有发送content-length
 			}
+			System.out.println(contentLength);
+
+			int c;
+			int i = 0;
+			while ((c = in.read()) != -1 && i++ < length) {
+				System.out.write(c);
+			}
+			System.out.println();
 		} catch (IOException e) {
 			System.err.println(e);
 		} finally {

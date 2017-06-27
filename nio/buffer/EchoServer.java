@@ -13,11 +13,11 @@ import java.util.Set;
 
 /**
  * @author qjj<br>
- *         使用 NIO缓冲区的服务器
+ *         压缩缓冲区，以备后续读入
  */
-public class IntgenServer {
+public class EchoServer {
 
-	public static int DEFAULT_PORT = 1919;
+	public static int DEFAULT_PORT = 1024;
 
 	public static void main(String[] args) {
 		int port = DEFAULT_PORT;
@@ -36,7 +36,6 @@ public class IntgenServer {
 			e.printStackTrace();
 			return;
 		}
-
 		while (true) {
 			try {
 				selector.select();
@@ -44,6 +43,7 @@ public class IntgenServer {
 				e.printStackTrace();
 				break;
 			}
+
 			Set<SelectionKey> readyKeys = selector.selectedKeys();
 			Iterator<SelectionKey> iterator = readyKeys.iterator();
 			while (iterator.hasNext()) {
@@ -55,22 +55,20 @@ public class IntgenServer {
 						SocketChannel client = server.accept();
 						System.out.println("Accepted connection from " + client);
 						client.configureBlocking(false);
-						SelectionKey key2 = client.register(selector, SelectionKey.OP_WRITE);
-						ByteBuffer output = ByteBuffer.allocate(4);
-						output.putInt(0);
-						output.flip();
-						key2.attach(output);
+						SelectionKey clientKey = client.register(selector,
+								SelectionKey.OP_WRITE | SelectionKey.OP_READ);
+						ByteBuffer output = ByteBuffer.allocate(100);
+						clientKey.attach(output);
+					} else if (key.isReadable()) {
+						SocketChannel client = (SocketChannel) key.channel();
+						ByteBuffer output = (ByteBuffer) key.attachment();
+						client.read(output);
 					} else if (key.isWritable()) {
 						SocketChannel client = (SocketChannel) key.channel();
 						ByteBuffer output = (ByteBuffer) key.attachment();
-						if (!output.hasRemaining()) {
-							output.rewind();
-							int value = output.getInt();
-							output.clear();
-							output.putInt(value + 1);
-							output.flip();
-						}
+						output.flip();
 						client.write(output);
+						output.compact(); // 将数据向前压缩，以便下次读入
 					}
 				} catch (IOException e) {
 					key.cancel();
@@ -83,4 +81,5 @@ public class IntgenServer {
 			}
 		}
 	}
+
 }

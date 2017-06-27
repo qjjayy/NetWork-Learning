@@ -15,7 +15,7 @@ public class ChargenClient {
 
 	public static void main(String[] args) {
 		int port = 1024;
-		String host = "10.12.140.124";
+		String host = "10.12.142.1";
 
 		try {
 			InetSocketAddress address = new InetSocketAddress(host, port);

@@ -15,6 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
+/**
+ * @author qjj<br>
+ *         使用NIO缓冲区返回单文件服务器
+ */
 public class NonblockingSingleFileHTTPServer {
 
 	private ByteBuffer contentBuffer;
@@ -85,7 +89,7 @@ public class NonblockingSingleFileHTTPServer {
 	}
 
 	public static void main(String[] args) {
-		String fileName = "D:\\aa.txt";
+		String fileName = "/Users/qjj/MyProjects/qualification/interface-http";
 		String contentType = URLConnection.getFileNameMap().getContentTypeFor(fileName);
 		Path path = Paths.get(fileName);
 		try {

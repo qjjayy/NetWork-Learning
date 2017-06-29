@@ -11,6 +11,11 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * @author qjj <br>
+ *         服务器端收发数据（代码中存在未知的知识点）
+ *
+ */
 public class EchoServer {
 
 	public static int DEFAULT_PORT = 1024;

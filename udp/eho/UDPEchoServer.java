@@ -1,8 +1,10 @@
-package application;
+package eho;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+
+import application.UDPServer;
 
 public class UDPEchoServer extends UDPServer {
 

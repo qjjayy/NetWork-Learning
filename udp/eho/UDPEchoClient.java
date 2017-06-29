@@ -15,7 +15,7 @@ public class UDPEchoClient {
 	public final static int PORT = 1024;
 
 	public static void main(String[] args) {
-		String hostname = "localhost";
+		String hostname = "192.168.1.11";
 
 		try {
 			InetAddress ia = InetAddress.getByName(hostname);

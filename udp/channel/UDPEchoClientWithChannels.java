@@ -15,7 +15,7 @@ public class UDPEchoClientWithChannels {
 	private final static int LIMIT = 100;
 
 	public static void main(String[] args) {
-		String host = "localhost";
+		String host = "192.168.1.5";
 		InetSocketAddress remote = new InetSocketAddress(host, PORT);
 
 		try (DatagramChannel channel = DatagramChannel.open()) {

@@ -6,6 +6,10 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
+/**
+ * @author qjj NetworkInterface类的大部分方法：
+ *         getNetworkInterfaces、getByInetAddress、getByName、getName、getDisplayName、getInetAddresses
+ */
 public class MyInterface {
 
 	public static void main(String[] args) {

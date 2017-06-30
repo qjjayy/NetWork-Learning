@@ -4,11 +4,17 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ * @author qjj<br>
+ *         InetAddress类的大部分方法:<br>
+ *         getByName、getAllByName、getByAddress、getLocalHost、getHostName、<br>
+ *         getCanonicalHostName、getHostAddress、getAddress、isReachable
+ */
 public class MyAdress {
 
 	public static void main(String[] args) {
 		try {
-			// DNS服务器找不到这个地址，会抛出异常
+			// 这个方法会建立连接查找DNS服务器，如果DNS服务器找不到这个地址，会抛出异常
 			// java.net包之外无法在后台改变InetAddress对象的字段，这使得InetAddress不可变，因此是线程安全的
 			InetAddress address1 = InetAddress.getByName("www.baidu.com");
 			System.out.println(address1);
@@ -41,7 +47,7 @@ public class MyAdress {
 		}
 
 		try {
-			// 如果失败就返回回送地址，即localhost/127.0.0.1
+			// 这个方法返回主机的InetAddress，如果失败就返回回送地址，即localhost/127.0.0.1
 			InetAddress address3 = InetAddress.getLocalHost();
 			System.out.println(address3);
 			System.out.println(address3.getHostAddress());
@@ -57,7 +63,7 @@ public class MyAdress {
 
 		byte[] address4 = { 107, 23, (byte) 216, (byte) 196 };
 		try {
-			// 以下两个方法不能保证这个主机一定存在，或者主机名能正确地映射到IP地址，只有当作为address参数与传入的字节数组大小不合法时，才会抛出异常
+			// 以下两个方法不能保证这个主机一定存在，或者保证主机名能正确地映射到IP地址，只有当作为address参数与传入的字节数组大小不合法时，才会抛出异常
 			// 如果域名服务器不可用，或者可能有不正确的信息，这会很有用
 			InetAddress lessWrong = InetAddress.getByAddress(address4);
 			System.out.println(lessWrong);

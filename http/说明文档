@@ -1,0 +1,5 @@
+重点介绍Cookie：
+	Cookie由服务器创建，浏览器选择接收，如果接收，下次发出属于上一次路径的上一级目录的请求路径，
+	就向服务器传回这个Cookie；
+	可以指示Cookie应用于某个作用域，也可以指示Cookie作用于最初URL的某个子目录
+	具体用CookieManager来实现，用CookieStore来存储和获取本地Cookie

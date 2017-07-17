@@ -1,0 +1,26 @@
+URL的语法：
+	protocal://userinfo@host:port/path?query#fragment
+	
+相对URL：
+	最前面有斜杠和没斜杠的区别
+
+构造URL的方法：略
+
+从URL获取数据的方法：
+	openStream()、openConnection()、getContent()--返回猜测的某种类型的对象
+
+分解URL的方法－－获取URL的5大部分
+
+比较URL的方法：
+	equals会尝试用DNS解析主机，判断两个主机是否相同，也因此，URL上的equals()可能是一个阻塞的I/O操作
+	应当避免将URL存储在依赖equals()的数据结构中，如Hashap，更好的选择是URI，可在必要时将URI与URL相互转换
+
+构造URI的方法：略
+
+分解URI的方法－－同上，但分为获取解码后的结果和不解码的结果
+
+URLEncoder编码、URLDecoder解码，即对URL、URI中的特殊字符串进行处理
+
+代理服务器ProxySelector类，用来确定不同连接的代理服务器
+
+

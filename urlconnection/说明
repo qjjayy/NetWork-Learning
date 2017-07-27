@@ -1,3 +1,14 @@
-URLConnection 提供对HTTP首部的访问 <br>
+URLConnection 提供对服务器响应的HTTP首部的访问 <br>
+例如: Content-type、Content-length、Content-encoding、Date、Last-modified、Expires<br>
 URLConnection 可以配置发送给服务器的请求参数 <br>
-URLConnection 除了读取服务器数据外，还可以向服务器写入数据
+URLConnection 除了读取服务器数据外，还可以向服务器写入数据<br>
+URLConnection 类有7个保护的实例类型，可以配置连接：
+ url、doInput、doOutput、allowUserInteraction、useCaches、ifModified、connected<br>
+Web缓存 对应的HTTP首部字段：Expires、Cache-control、Last-modified、Etag
+Java虚拟机只支持一个共享缓存，可以由ResponseCache、CacheRequest、CacheResponse实现<br>
+HTTPURLConnection 可以设置具体的请求方法：
+ GET、PUT、DELETE、HEAD、TRACE、POST、OPTIONS
+HTTPURLConnection 还可以确定是否重定向、获得响应码和消息、确定是否使用了代理服务器
+流模式：HTTP首部中的Content-length需要完全符合请求体／响应体的实际长度，而有些场景无法提前知道长度，
+所以只有当所有数据都输入完毕（输入到缓存中），流关闭后，才会通过网络发送。这样，会影响网络传输的效率。
+ 可以提前获取并设置数据的长度，或者通过分块传输编码方式，但后者不能用于重定向和需要口令认证的场景。

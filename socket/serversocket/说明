@@ -1,0 +1,24 @@
+服务器Socket(ServerSocket):
+	服务器程序的基本生命周期：
+		使用ServerSocket()构造函数创建一个新的ServerSocket;
+		使用ServerSocket()的accept()方法监听连接，返回一个连接客户端和服务器的Socket;
+		根据服务器的类型，调用Socket的getInputStream()和getOutputStream();
+		服务器和客户端根据已协商的协议交互，直到要关闭连接;
+		服务器或客户端（或二者）关闭连接;
+		服务器返回步骤二，等待下一次连接。
+	
+	操作系统会把指向某个特定端口的入站连接请求存储在一个先进先出的队列中，默认地，Java将这个队列的长度设置为50，
+	可以在构造ServerSocket时指定，但不能大于系统的限定；
+	然后使用线程池来处理每一个连接请求。
+	
+	请求的记录日志，要注意日志工具应该是一个共享的静态字段，因为日志是共用的。
+	
+	强烈建议服务器程序中加入RuntimeException异常校验，以防止一个请求进入计划路径之外而抛出一个IllegalArgumentException,
+	从而导致整个服务器崩溃。
+	
+	ServerSocket可供设置的选项：SO_TIMEOUT、SO_REUSEADDR、SO_RCVBUF
+	
+	性能优化：使用一个低优先级的线程实现只能缓存，将最频繁的请求保存在内存中。
+	
+		
+		
